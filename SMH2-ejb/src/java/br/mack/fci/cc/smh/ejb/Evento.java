@@ -6,8 +6,6 @@
 
 package br.mack.fci.cc.smh.ejb;
 
-import com.mongodb.DBObject;
-
 /**
  *
  * @author prgoes
@@ -24,12 +22,12 @@ public class Evento {
         _tipo = "";
         _valor = "";
     }
-    
-    public Evento(DBObject doc) {                
-        _sensor = doc.get("Sensor").toString();
-        _tipo = doc.get("Tipo").toString();
-        _valor = doc.get("Valor").toString();
-        _dataDoEvento = doc.get("DataDoEvento").toString();
+       
+    public Evento(String data, String sensor, String tipo, String valor) {
+        _dataDoEvento = data;
+        _tipo = tipo;
+        _sensor = sensor;
+        _valor = valor;
     }
         
     public String getDataDoEvento() { return _dataDoEvento; }

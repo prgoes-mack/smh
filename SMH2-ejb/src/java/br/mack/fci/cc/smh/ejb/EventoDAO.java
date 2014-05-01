@@ -10,6 +10,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -29,6 +30,26 @@ public class EventoDAO {
     
     public String teste(String nome) {
         return "Ola " + nome;
+    }
+    
+    public BasicDBObject gerarDocument(Evento e) {
+        BasicDBObject doc = new BasicDBObject("DataDoEvento", e.getDataDoEvento()).
+                              append("Sensor", e.getSensor()).
+                              append("Tipo", e.getTipo()).
+                              append("Valor", e.getValor());
+        
+        return doc;
+    }
+    
+    public Evento gerarEvento(DBObject doc) {
+        String sensor = doc.get("Sensor").toString();
+        String tipo = doc.get("Tipo").toString();
+        String valor = doc.get("Valor").toString();
+        String dataDoEvento = doc.get("DataDoEvento").toString();
+        
+        Evento e = new Evento(valor, sensor, tipo, valor);
+        
+        return e;
     }
     
     public void gravarEvento() {
@@ -54,7 +75,7 @@ public class EventoDAO {
         }
     }
     
-    public void gravarEvento(Document xmlEvento) {
+    public void gravarEvento(Evento e) {
         MongoClient mongoClient = null;
         DBCollection coll = null;
         try {
@@ -62,10 +83,7 @@ public class EventoDAO {
             DB db = mongoClient.getDB( "Parking" );
             coll = db.getCollection("Eventos");
 
-            BasicDBObject doc = new BasicDBObject("DataDoEvento", xmlEvento.getElementsByTagName("data").item(0).getTextContent()).
-                              append("Sensor", xmlEvento.getElementsByTagName("unidadegrandeza").item(0).getTextContent()).
-                              append("Tipo", "Ocupado").
-                              append("Valor", xmlEvento.getElementsByTagName("valor").item(0).getTextContent());
+            BasicDBObject doc = gerarDocument(e);
 
             coll.insert(doc);
         } catch (UnknownHostException ex) {
@@ -89,7 +107,7 @@ public class EventoDAO {
             DBCursor cursor = coll.find();
             try {
                while(cursor.hasNext()) {
-                   lista.add(new Evento(cursor.next()));
+                   lista.add(gerarEvento(cursor.next()));
                }            
             } catch(Exception ex) {
                     Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
