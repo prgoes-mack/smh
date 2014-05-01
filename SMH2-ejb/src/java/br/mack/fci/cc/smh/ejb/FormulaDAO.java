@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.mack.fci.cc.smh.ejb;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -19,37 +19,37 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import org.w3c.dom.Document;
+
 /**
  *
  * @author Douglas
  */
 @Stateless
 public class FormulaDAO {
-    
+
     public BasicDBObject gerarDocument(Formula f) {
         BasicDBObject doc = new BasicDBObject("NomeFormula", f.getNomeFormula()).
-                              append("Sensor", f.getFormula());
-        
+                append("Sensor", f.getFormula());
+
         return doc;
     }
-    
-    public void gravarConsulta(Formula f) {
+
+    public void gravarFormula(Formula f) {
         MongoClient mongoClient = null;
         DBCollection coll = null;
         try {
             mongoClient = new MongoClient();
             DB db = mongoClient.getDB("Parking");
             coll = db.getCollection("Formulas");
-            
+
             BasicDBObject doc = gerarDocument(f);
 
             coll.insert(doc);
         } catch (UnknownHostException ex) {
-			Logger.getLogger(FormulaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally {
+            Logger.getLogger(FormulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             mongoClient.close();
         }
     }
-    
+
 }
