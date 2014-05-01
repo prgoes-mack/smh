@@ -29,9 +29,16 @@ public class FormulaDAO {
 
     public BasicDBObject gerarDocument(Formula f) {
         BasicDBObject doc = new BasicDBObject("NomeFormula", f.getNomeFormula()).
-                append("Sensor", f.getFormula());
+                append("Formula", f.getFormula());
 
         return doc;
+    }
+
+    public Formula gerarFormula(DBObject doc) {
+        String nomeFormula = doc.get("NomeFormula").toString();
+        List<String> formula = (List<String>) doc.get("Formula");
+
+        return new Formula(nomeFormula, formula);
     }
 
     public void gravarFormula(Formula f) {
@@ -50,6 +57,36 @@ public class FormulaDAO {
         } finally {
             mongoClient.close();
         }
+    }
+
+    public List<Formula> lerTodosAsFormulas() {
+        List<Formula> lista = new ArrayList<>();
+
+        MongoClient mongoClient = null;
+        DBCollection coll = null;
+        try {
+            mongoClient = new MongoClient();
+            DB db = mongoClient.getDB("Parking");
+            coll = db.getCollection("Formulas");
+
+            DBCursor cursor = coll.find();
+            try {
+                while (cursor.hasNext()) {
+                    lista.add(gerarFormula(cursor.next()));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                cursor.close();
+            }
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mongoClient.close();
+        }
+
+        return lista;
     }
 
 }

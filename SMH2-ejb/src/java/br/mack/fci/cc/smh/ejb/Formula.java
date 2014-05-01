@@ -20,6 +20,11 @@ public class Formula {
         _Nome = nome;
     }
     
+    public Formula(String nome, List<String> formula){
+        _Formula = formula;
+        _Nome = nome;
+    }
+    
     public List<String> getFormula(){
         return _Formula;
     }
