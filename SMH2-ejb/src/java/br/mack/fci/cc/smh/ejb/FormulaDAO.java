@@ -29,7 +29,8 @@ public class FormulaDAO {
 
     public BasicDBObject gerarDocument(Formula f) {
         BasicDBObject doc = new BasicDBObject("NomeFormula", f.getNomeFormula()).
-                append("Formula", f.getFormula());
+                append("Formula", f.getFormula()).
+                append("Original", f.getFormulaOriginal());
 
         return doc;
     }
@@ -37,8 +38,9 @@ public class FormulaDAO {
     public Formula gerarFormula(DBObject doc) {
         String nomeFormula = doc.get("NomeFormula").toString();
         List<String> formula = (List<String>) doc.get("Formula");
+        String original = doc.get("Original").toString();
 
-        return new Formula(nomeFormula, formula);
+        return new Formula(nomeFormula, formula, original);
     }
 
     public void gravarFormula(Formula f) {
@@ -88,8 +90,8 @@ public class FormulaDAO {
 
         return lista;
     }
-    
-    public void removerFormula(String nome){
+
+    public void removerFormula(String nome) {
         MongoClient mongoClient = null;
         DBCollection coll = null;
         try {
@@ -97,8 +99,9 @@ public class FormulaDAO {
             DB db = mongoClient.getDB("Parking");
             coll = db.getCollection("Formulas");
 
-            //coll.remove()
-            
+            BasicDBObject query = new BasicDBObject("Nome", nome);
+            coll.remove(query);
+
         } catch (UnknownHostException ex) {
             Logger.getLogger(FormulaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

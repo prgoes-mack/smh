@@ -14,13 +14,16 @@ import java.util.List;
 public class Formula {
     private List<String> _Formula;
     private String _Nome;
+    private String _Original;
     
     public Formula(String nome, String formula){
+        _Original = formula;
         _Formula = postfix(formula);
         _Nome = nome;
     }
     
-    public Formula(String nome, List<String> formula){
+    public Formula(String nome, List<String> formula, String original){
+        _Original = original;
         _Formula = formula;
         _Nome = nome;
     }
@@ -32,5 +35,9 @@ public class Formula {
     public String getNomeFormula()
     {
         return _Nome;
+    }
+    
+    public String getFormulaOriginal(){
+        return _Original;
     }
 }
