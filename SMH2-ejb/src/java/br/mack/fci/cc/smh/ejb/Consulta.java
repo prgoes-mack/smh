@@ -18,8 +18,10 @@ public class Consulta {
     private List <Evento> dados = new ArrayList<>();
     private List <String> formula = new ArrayList<>();
     
+    public List<Evento> getEventos() { return dados; }
+    public List<String> getFormula() { return formula; }    
     
-     public void CalculaFormula (ArrayList<Evento> da, ArrayList<String> formu)
+    public void CalculaFormula (ArrayList<Evento> da, ArrayList<String> formu)
     {
         int x;
         this.dados=da;
