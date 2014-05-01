@@ -21,11 +21,12 @@ public class Consulta {
     private List <Evento> sensores = new ArrayList<>();
     private List <Integer> resultados = new ArrayList<>();
     private Date dataConsulta;
+    private Integer resultFinal;
     
     public List<Evento> getEventos() { return dados; }
     public List<String> getFormula() { return formula; }  
     public List<Evento> getSensores() {return sensores; }
-    public List<Integer> getResultados() {return resultados; }
+    public Integer getResultadoFinal() {return resultFinal; }
     public Date getDataConsulta(){ return dataConsulta; }
     
     public void CalculaFormula (ArrayList<Evento> da, ArrayList<String> formu)
@@ -116,6 +117,8 @@ public class Consulta {
             x++;
         }
         System.out.println("Resultado: "+resultados.get(0));
+        resultFinal=resultados.get(0);
+        resultados.clear();
     }
     
 }
