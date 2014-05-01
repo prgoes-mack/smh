@@ -10,6 +10,7 @@ package br.mack.fci.cc.smh.ejb;
  *
  * @author Douglas
  */
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import java.util.*;
 
 public class ShuntingYard {
@@ -38,61 +39,55 @@ public class ShuntingYard {
     }
 
     public static List<String> postfix(String infix) {
-        List<String> output = new ArrayList<>();
+        List<String> output = new LinkedList<>();
         Deque<String> stack = new LinkedList<>();
         String[] temp = infix.split("");
         String token = "";
         int i;
         for (i = 0; i < temp.length; i++) {
-            token = temp[i];
-            // Verifica se é operador;
+            // operator
+            token = trim(temp[i]);
             if (ops.containsKey(token)) {
                 while (!stack.isEmpty() && isHigerPrec(token, stack.peek())) {
-                    output.add(stack.pop().trim());
+                    output.add(stack.pop());
                 }
                 stack.push(token);
 
-                // Checa se é abertura de parenteses;
+                // left parenthesis
             } else if (token.equals("(")) {
                 stack.push(token);
 
-                // Checa se é fechamento de paranteses;
+                // right parenthesis
             } else if (token.equals(")")) {
                 while (!stack.peek().equals("(")) {
-                    output.add(stack.pop().trim());
+                    output.add(stack.pop());
                 }
                 stack.pop();
 
                 // digit or word
             } else {
                 String tempString = "";
-                if (!temp[i].isEmpty()) {
+                if (!token.isEmpty()) {
                     while (!ops.containsKey(token) && !token.equals("(") && !token.equals(")")) {
                         tempString = tempString.concat(token);
                         if (i < temp.length - 1) {
-                            token = temp[++i];
+                            token = trim(temp[++i]);
                         } else {
                             break;
                         }
                     }
-                    output.add(tempString.trim());
-                    if (i < temp.length - 1) i--; //Reduz 1 do contador, devido a ++ do for, evita pular caracteries;
+                    output.add(tempString);
+                    if (i < temp.length - 1) i--;
                 }
 
             }
         }
 
         while (!stack.isEmpty()) {
-            output.add(stack.pop().trim());
-        }
-        
-        List<String> outputFinal = new ArrayList<String>();
-        
-        for(String s : output) {
-            outputFinal.add(s.trim());
+            output.add(stack.pop());
         }
 
-        return outputFinal;
+        return output;
     }
 
 }

@@ -88,5 +88,22 @@ public class FormulaDAO {
 
         return lista;
     }
+    
+    public void removerFormula(String nome){
+        MongoClient mongoClient = null;
+        DBCollection coll = null;
+        try {
+            mongoClient = new MongoClient();
+            DB db = mongoClient.getDB("Parking");
+            coll = db.getCollection("Formulas");
+
+            //coll.remove()
+            
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FormulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mongoClient.close();
+        }
+    }
 
 }
