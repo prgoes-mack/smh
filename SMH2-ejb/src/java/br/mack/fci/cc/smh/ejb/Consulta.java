@@ -95,10 +95,20 @@ public class Consulta {
                 }
                 break;
                 default: {
-                    for (int k = 0; k < sensores.size(); k++) {
-                        if (sensores.get(k).getSensor().equals(aux)) {
-                            int result = Integer.parseInt(sensores.get(k).getValor());
-                            resultados.add(result);
+                    //verifica se é numero
+                    if (Character.isDigit(aux.charAt(0))==true) 
+                    {
+                        int num = Integer.parseInt(aux);
+                        resultados.add(num);
+                    }
+                    //se nao for é uma posicao de sensor
+                    else
+                    {
+                        for (int k = 0; k < sensores.size(); k++) {
+                            if (sensores.get(k).getSensor().equals(aux)) {
+                                int result = Integer.parseInt(sensores.get(k).getValor());
+                                resultados.add(result);
+                            }
                         }
                     }
                 }
