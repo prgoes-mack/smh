@@ -85,38 +85,57 @@ public class Consulta {
             aux = formula.get(x);
             switch (aux) {
                 case ("+"): {
-                    for (int t = 0; t < resultados.size(); t++) {
-                        resultado = resultados.get(t) + resultado;
+                    resultado = 0;
+                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    for (int t = 0; t < (resultados.size() - 2); t++) {
+                        novosResultados.add(resultados.get(t));
                     }
+                    
+                    resultado = resultados.get(resultados.size() - 2) + resultados.get(resultados.size() - 1);
+                    novosResultados.add(resultado);
                     resultados.clear();
-                    resultados.add(resultado);
+                    resultados.addAll(novosResultados);
                 }
                 break;
                 case ("-"): {
-                    for (int t = 0; t < resultados.size(); t++) {
-                        resultado = resultados.get(t) - resultado;
+                    resultado = 0;
+                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    for (int t = 0; t < (resultados.size() - 2); t++) {
+                        novosResultados.add(resultados.get(t));
                     }
+                    
+                    resultado = resultados.get(resultados.size() - 2) - resultados.get(resultados.size() - 1);
+                    novosResultados.add(resultado);
                     resultados.clear();
-                    resultados.add(resultado);
+                    resultados.addAll(novosResultados);
                 }
                 break;
                 case ("*"): {
                     resultado = 1;
-                    for (int t = 0; t < resultados.size(); t++) {
-                        resultado = resultados.get(t) * resultado;
+                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    for (int t = 0; t < (resultados.size() - 2); t++) {
+                        novosResultados.add(resultados.get(t));
                     }
+                    
+                    resultado = resultados.get(resultados.size() - 2) * resultados.get(resultados.size() - 1);
+                    novosResultados.add(resultado);
                     resultados.clear();
-                    resultados.add(resultado);
+                    resultados.addAll(novosResultados);
 
                 }
                 break;
                 case ("/"): {
-                    resultado = 1;
-                    for (int t = 0; t < resultados.size(); t++) {
-                        resultado = +resultados.get(t) / resultado;
+                    resultado = 0;
+                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    for (int t = 0; t < (resultados.size() - 2); t++) {
+                        novosResultados.add(resultados.get(t));
                     }
+                    
+                    resultado = resultados.get(resultados.size() - 2) / resultados.get(resultados.size() - 1);
+                            
+                    novosResultados.add(resultado);
                     resultados.clear();
-                    resultados.add(resultado);
+                    resultados.addAll(novosResultados);
                 }
                 break;
                 default: {
