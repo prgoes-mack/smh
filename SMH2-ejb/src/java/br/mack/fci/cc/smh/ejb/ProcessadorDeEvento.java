@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import java.util.Date;
 import org.w3c.dom.Document;
 
 /**
@@ -21,7 +22,7 @@ public class ProcessadorDeEvento {
         String valor = xmlEvento.getElementsByTagName("valor").item(0).getTextContent();
         String data = xmlEvento.getElementsByTagName("data").item(0).getTextContent();
         
-        Evento e = new Evento(data, sensor, tipo, valor);
+        Evento e = new Evento(new Date(), sensor, tipo, valor);
         
         return e;
     }

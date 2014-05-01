@@ -45,9 +45,9 @@ public class EventoDAO {
         String sensor = doc.get("Sensor").toString();
         String tipo = doc.get("Tipo").toString();
         String valor = doc.get("Valor").toString();
-        String dataDoEvento = doc.get("DataDoEvento").toString();
+        Date dataDoEvento = (Date)doc.get("DataDoEvento");
         
-        Evento e = new Evento(valor, sensor, tipo, valor);
+        Evento e = new Evento(dataDoEvento, sensor, tipo, valor);
         
         return e;
     }
