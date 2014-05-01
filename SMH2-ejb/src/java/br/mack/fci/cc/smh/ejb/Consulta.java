@@ -29,7 +29,7 @@ public class Consulta {
     public Integer getResultadoFinal() {return resultFinal; }
     public Date getDataConsulta(){ return dataConsulta; }
     
-    public Consulta(ArrayList<Evento> da, ArrayList<String> formu) {
+    public Consulta(List<Evento> da, List<String> formu) {
         CalculaFormula(da, formu);
     }
     
@@ -43,7 +43,7 @@ public class Consulta {
         this.sensores = dados;
     }
     
-    public void CalculaFormula (ArrayList<Evento> da, ArrayList<String> formu)
+    public void CalculaFormula (List<Evento> da, List<String> formu)
     {
         int x;
         this.dados=da;

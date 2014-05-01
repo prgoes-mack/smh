@@ -24,9 +24,18 @@ public class ConsultaEJB {
     @EJB
     private EventoDAO eventos;
     
+    @EJB
+    private FormulaDAO formulas;
+    
     public void gerarConsultas() {
         
         Consulta consultaMaisRecente = consultas.lerConsultaMaisRecente();
         List<Evento> eventosParaAnalisar = eventos.lerTodosAposData(consultaMaisRecente.getDataConsulta());
+        List<Formula> formulasParaConsolidar = formulas.lerTodosAsFormulas();
+        
+        for(Formula formula : formulasParaConsolidar) {
+            Consulta novaConsulta = new Consulta(eventosParaAnalisar, formula.getFormula());
+            consultas.gravarConsulta(novaConsulta);
+        }
     }
 }
