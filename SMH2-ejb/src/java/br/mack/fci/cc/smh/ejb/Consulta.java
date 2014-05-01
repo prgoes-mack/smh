@@ -6,10 +6,15 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +39,12 @@ public class Consulta {
     }
     
     public Consulta() {
-        dataConsulta = new Date(1900, 1, 1);
+        String string = "January 1, 1900";
+        try {
+            dataConsulta = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
+        } catch (ParseException ex) {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Consulta(Date data, int resultado, List<Evento> dados, List<String> formula) {

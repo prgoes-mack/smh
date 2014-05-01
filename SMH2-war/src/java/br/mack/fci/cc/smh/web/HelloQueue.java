@@ -46,13 +46,23 @@ public class HelloQueue extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String mensagem = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Vaga-1</unidadegrandeza><valor>1</valor></dados>";
+        String mensagem1 = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Sensor1</unidadegrandeza><valor>1</valor></dados>";
+        String mensagem2 = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Sensor2</unidadegrandeza><valor>1</valor></dados>";
+        String mensagem3 = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Sensor3</unidadegrandeza><valor>1</valor></dados>";
         try {
             Connection conn = myFactory.createConnection();
             Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
             MessageProducer producer = (MessageProducer) session.createProducer(myQueue);
             TextMessage msg = session.createTextMessage();
-            msg.setText(mensagem);
+            msg.setText(mensagem1);
+            producer.send(msg);
+            
+            msg = session.createTextMessage();
+            msg.setText(mensagem2);
+            producer.send(msg);
+            
+            msg = session.createTextMessage();
+            msg.setText(mensagem3);
             producer.send(msg);
             Logger.getLogger(HelloQueue.class.getName()).log(Level.INFO,
                     "OK, mensagem enviada", "");

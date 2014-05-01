@@ -83,7 +83,7 @@ public class ConsultaDAO {
             DB db = mongoClient.getDB("Parking");
             coll = db.getCollection("Consultas");
             
-            DBCursor cursor = coll.find().sort(new BasicDBObject("DataDaConsulta","-1"));
+            DBCursor cursor = coll.find().sort(new BasicDBObject("DataDaConsulta",-1));
             
             if(cursor.hasNext()) {
                 return gerarConsulta(cursor.next());
