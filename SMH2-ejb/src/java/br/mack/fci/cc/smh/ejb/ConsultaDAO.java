@@ -34,14 +34,14 @@ public class ConsultaDAO {
     
     public BasicDBObject gerarDocument(Consulta c) {
         ArrayList x = new ArrayList();
-            for(Evento e : c.getEventos()) {
+            for(Evento e : c.getSensores()) {
                 BasicDBObject eventoDocument = eventos.gerarDocument(e);
                 x.add(eventoDocument);
             }
 
             BasicDBObject doc = new BasicDBObject("DataDaConsulta", c.getDataConsulta()).
                               append("Formula", c.getFormula()).
-                              append ("DadosFormula", c.getSensores()).
+                              append ("DadosFormula", x).
                               append ("Resultado",c.getResultadoFinal());
             
         return doc;

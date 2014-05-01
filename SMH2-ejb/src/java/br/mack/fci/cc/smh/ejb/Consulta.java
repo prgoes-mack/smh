@@ -101,7 +101,7 @@ public class Consulta {
                 }
                 break;
                 case ("*"): {
-
+                    resultado = 1;
                     for (int t = 0; t < resultados.size(); t++) {
                         resultado = resultados.get(t) * resultado;
                     }
@@ -111,7 +111,7 @@ public class Consulta {
                 }
                 break;
                 case ("/"): {
-
+                    resultado = 1;
                     for (int t = 0; t < resultados.size(); t++) {
                         resultado = +resultados.get(t) / resultado;
                     }
