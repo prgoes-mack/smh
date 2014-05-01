@@ -49,71 +49,54 @@ public class Consulta {
             String aux;
             
             aux = formula.get(x);
-            if (aux.contentEquals("+"+"-"+"/"+"*")) // faz conta
-            {
-                switch (aux) {
-                    case ("+"): {
-                        for (int t=0;t<resultados.size();t++)
-                        {
-                            resultado=resultados.get(t)+resultado;
-                        }
-                        resultados.clear();
-                        resultados.add(resultado);
+            switch (aux) {
+                case ("+"): {
+                    for (int t = 0; t < resultados.size(); t++) {
+                        resultado = resultados.get(t) + resultado;
                     }
-                    break;
-                    case ("-"): {
-                        for (int t=0;t<resultados.size();t++)
-                        {
-                            resultado=resultados.get(t)-resultado;
-                        }
-                        resultados.clear();
-                        resultados.add(resultado);
-                    }
-                    break;
-                    case ("*"): {
-
-                        for (int t=0;t<resultados.size();t++)
-                        {
-                            resultado=resultados.get(t)*resultado;
-                        }
-                        resultados.clear();
-                        resultados.add(resultado);
-                        
-                    }
-                    break;
-                    case ("/"): {
-
-                        for (int t=0;t<resultados.size();t++)
-                        {
-                            resultado=+resultados.get(t)/resultado;
-                        }
-                        resultados.clear();
-                        resultados.add(resultado);
-                    }
-                    break;
+                    resultados.clear();
+                    resultados.add(resultado);
                 }
-                 
-            }
-            else
-            {
-                for (int k=0;k<sensores.size();k++)
-                {
-                    if (sensores.get(k).getSensor().equals(aux))
-                    {
-                        int result = Integer.parseInt(sensores.get(k).getValor());
-                        resultados.add(result);
+                break;
+                case ("-"): {
+                    for (int t = 0; t < resultados.size(); t++) {
+                        resultado = resultados.get(t) - resultado;
                     }
-                }  
+                    resultados.clear();
+                    resultados.add(resultado);
+                }
+                break;
+                case ("*"): {
+
+                    for (int t = 0; t < resultados.size(); t++) {
+                        resultado = resultados.get(t) * resultado;
+                    }
+                    resultados.clear();
+                    resultados.add(resultado);
+
+                }
+                break;
+                case ("/"): {
+
+                    for (int t = 0; t < resultados.size(); t++) {
+                        resultado = +resultados.get(t) / resultado;
+                    }
+                    resultados.clear();
+                    resultados.add(resultado);
+                }
+                break;
+                default: {
+                    for (int k = 0; k < sensores.size(); k++) {
+                        if (sensores.get(k).getSensor().equals(aux)) {
+                            int result = Integer.parseInt(sensores.get(k).getValor());
+                            resultados.add(result);
+                        }
+                    }
+                }
             }
-            
+            x++;
         }
-        
-        
-        
-        //Aplica a formula com os eventos mais recentes encontrados
-    
-
-
+        System.out.println("Resultado: "+resultados.get(0));
     }
     
 }
