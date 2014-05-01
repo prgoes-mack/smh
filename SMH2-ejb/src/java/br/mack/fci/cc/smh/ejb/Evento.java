@@ -16,16 +16,16 @@ public class Evento {
     private Date _dataDoEvento;
     private String _sensor;
     private String _tipo;
-    private String _valor;
+    private int _valor;
     
     public Evento(){        
         _dataDoEvento = new Date(1900, 01, 01);
         _sensor = "";
         _tipo = "";
-        _valor = "";
+        _valor = 0;
     }
        
-    public Evento(Date data, String sensor, String tipo, String valor) {
+    public Evento(Date data, String sensor, String tipo, int valor) {
         _dataDoEvento = data;
         _tipo = tipo;
         _sensor = sensor;
@@ -35,5 +35,5 @@ public class Evento {
     public Date getDataDoEvento() { return _dataDoEvento; }
     public String getSensor() { return _sensor; }
     public String getTipo() { return _tipo; }
-    public String getValor() { return _valor; }
+    public int getValor() { return _valor; }
 }

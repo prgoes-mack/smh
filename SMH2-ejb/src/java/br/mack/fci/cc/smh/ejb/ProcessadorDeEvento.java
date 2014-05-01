@@ -19,7 +19,7 @@ public class ProcessadorDeEvento {
         
         String tipo = "Ocupado";
         String sensor = xmlEvento.getElementsByTagName("unidadegrandeza").item(0).getTextContent();
-        String valor = xmlEvento.getElementsByTagName("valor").item(0).getTextContent();
+        int valor = Integer.parseInt(xmlEvento.getElementsByTagName("valor").item(0).getTextContent());
         String data = xmlEvento.getElementsByTagName("data").item(0).getTextContent();
         
         Evento e = new Evento(new Date(), sensor, tipo, valor);

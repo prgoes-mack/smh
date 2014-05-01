@@ -121,7 +121,7 @@ public class Consulta {
                     {
                         for (int k = 0; k < sensores.size(); k++) {
                             if (sensores.get(k).getSensor().equals(aux)) {
-                                int result = Integer.parseInt(sensores.get(k).getValor());
+                                int result = sensores.get(k).getValor();
                                 resultados.add(result);
                             }
                         }
