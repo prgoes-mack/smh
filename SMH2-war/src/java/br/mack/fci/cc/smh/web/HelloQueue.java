@@ -46,7 +46,7 @@ public class HelloQueue extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String mensagem = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Vaga-1</unidadegrandeza><valor>2</valor></dados>";
+        String mensagem = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Vaga-1</unidadegrandeza><valor>1</valor></dados>";
         try {
             Connection conn = myFactory.createConnection();
             Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
