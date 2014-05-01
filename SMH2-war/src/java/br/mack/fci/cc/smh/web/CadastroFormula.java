@@ -6,8 +6,10 @@
 
 package br.mack.fci.cc.smh.web;
 
+import br.mack.fci.cc.smh.ejb.FormulaEJB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CadastroFormula", urlPatterns = {"/CadastroFormula"})
 public class CadastroFormula extends HttpServlet {
 
+    @EJB
+    private FormulaEJB formulas;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,6 +37,9 @@ public class CadastroFormula extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        formulas.InsertFormula(request.getParameter("nome"), request.getParameter("formula"));
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -41,7 +48,8 @@ public class CadastroFormula extends HttpServlet {
             out.println("<title>Servlet CadastroFormula</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CadastroFormula at " + request.getContextPath() + "</h1>");
+            out.println("Nome da Formula: " + request.getParameter("nome") + "<br/>");
+            out.println("Formula: " + request.getParameter("formula") + "<br/>");
             out.println("</body>");
             out.println("</html>");
         }
