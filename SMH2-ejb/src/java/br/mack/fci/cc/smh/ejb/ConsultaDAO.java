@@ -42,7 +42,7 @@ public class ConsultaDAO {
                              // append("Dados", x).
                               append("Formula", c.getFormula()).
                               append ("DadosFormula", c.getSensores()).
-                              append ("Resultado",c.getResultados());
+                              append ("Resultado",c.getResultadoFinal());
             
         return doc;
     }
