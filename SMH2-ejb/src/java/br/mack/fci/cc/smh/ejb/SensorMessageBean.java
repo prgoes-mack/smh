@@ -40,7 +40,8 @@ public class SensorMessageBean implements MessageListener {
         try {
             TextMessage tm = (TextMessage) message;
             Document doc = XMLParser.convertStringToDocument(tm.getText());
-            eventos.gravarEvento(doc);  
+            Evento e = ProcessadorDeEvento.tratarMensagem(doc);
+            eventos.gravarEvento(e);  
             Logger.getLogger("Log de MrMessageBean").log(Level.INFO, "Mensagem recebida e processada. Conteudo: " + tm.getText(), "");
         } catch (JMSException ex) {
             Logger.getLogger(SensorMessageBean.class.getName()).log(Level.SEVERE, null, ex);

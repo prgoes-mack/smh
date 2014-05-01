@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.w3c.dom.Document;
 
@@ -24,7 +25,25 @@ import org.w3c.dom.Document;
  *
  * @author prgoes
  */
+@Stateless
 public class ConsultaDAO {
+    
+    @EJB 
+    EventoDAO eventos;
+    
+    public BasicDBObject gerarDocument(Consulta c) {
+        ArrayList x = new ArrayList();
+            for(Evento e : c.getEventos()) {
+                BasicDBObject eventoDocument = eventos.gerarDocument(e);
+                x.add(eventoDocument);
+            }
+
+            BasicDBObject doc = new BasicDBObject("DataDaConsulta", new Date()).
+                              append("Dados", x).
+                              append("Formula", c.getFormula());
+            
+        return doc;
+    }
     
     public void gravarConsulta(Consulta c) {
         MongoClient mongoClient = null;
@@ -34,18 +53,7 @@ public class ConsultaDAO {
             DB db = mongoClient.getDB("Parking");
             coll = db.getCollection("Consultas");
             
-            ArrayList x = new ArrayList();
-            for(Evento e : c.getEventos()) {
-                BasicDBObject eventoDocument = new BasicDBObject("DataDoEvento", e.getDataDoEvento()).
-                                                append("Sensor", e.getSensor()).
-                                                append("Tipo", e.getTipo()).
-                                                append("Valor", e.getValor());
-                x.add(eventoDocument);
-            }
-
-            BasicDBObject doc = new BasicDBObject("DataDaConsulta", new Date()).
-                              append("Dados", x).
-                              append("Formula", c.getFormula());
+            BasicDBObject doc = gerarDocument(c);
 
             coll.insert(doc);
         } catch (UnknownHostException ex) {
