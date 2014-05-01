@@ -8,6 +8,7 @@ package br.mack.fci.cc.smh.ejb;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,20 +18,26 @@ import java.util.List;
 public class Consulta {
     private List <Evento> dados = new ArrayList<>();
     private List <String> formula = new ArrayList<>();
+    private List <Evento> sensores = new ArrayList<>();
+    private List <Integer> resultados = new ArrayList<>();
+    private Date dataConsulta;
     
     public List<Evento> getEventos() { return dados; }
-    public List<String> getFormula() { return formula; }    
+    public List<String> getFormula() { return formula; }  
+    public List<Evento> getSensores() {return sensores; }
+    public List<Integer> getResultados() {return resultados; }
+    public Date getDataConsulta(){ return dataConsulta; }
     
     public void CalculaFormula (ArrayList<Evento> da, ArrayList<String> formu)
     {
         int x;
         this.dados=da;
         this.formula=formu;
-       // String sensor;
-        ArrayList <Evento> sensores = new ArrayList<>();
-        //Percorre dados para encontrar os eventos mais recentes
-        ArrayList <Integer> resultados = new ArrayList<>();
+        dataConsulta=new Date();
         
+        //Percorre dados para encontrar os eventos mais recentes
+        //assume-se que a lista de eventos esteja ordenada do evento 
+        //mais recente ao mais antigo
         for (x=0; x<dados.size(); x++)
         {
             //verifica se já tenho esse sensor

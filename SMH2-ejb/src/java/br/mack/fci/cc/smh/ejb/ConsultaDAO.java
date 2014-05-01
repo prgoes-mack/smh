@@ -38,9 +38,11 @@ public class ConsultaDAO {
                 x.add(eventoDocument);
             }
 
-            BasicDBObject doc = new BasicDBObject("DataDaConsulta", new Date()).
-                              append("Dados", x).
-                              append("Formula", c.getFormula());
+            BasicDBObject doc = new BasicDBObject("DataDaConsulta", c.getDataConsulta()).
+                             // append("Dados", x).
+                              append("Formula", c.getFormula()).
+                              append ("DadosFormula", c.getSensores()).
+                              append ("Resultado",c.getResultados());
             
         return doc;
     }
