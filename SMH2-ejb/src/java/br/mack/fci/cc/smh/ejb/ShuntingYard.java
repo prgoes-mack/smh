@@ -48,7 +48,7 @@ public class ShuntingYard {
             // Verifica se é operador;
             if (ops.containsKey(token)) {
                 while (!stack.isEmpty() && isHigerPrec(token, stack.peek())) {
-                    output.add(stack.pop());
+                    output.add(stack.pop().trim());
                 }
                 stack.push(token);
 
@@ -59,7 +59,7 @@ public class ShuntingYard {
                 // Checa se é fechamento de paranteses;
             } else if (token.equals(")")) {
                 while (!stack.peek().equals("(")) {
-                    output.add(stack.pop());
+                    output.add(stack.pop().trim());
                 }
                 stack.pop();
 
@@ -75,7 +75,7 @@ public class ShuntingYard {
                             break;
                         }
                     }
-                    output.add(tempString);
+                    output.add(tempString.trim());
                     if (i < temp.length - 1) i--; //Reduz 1 do contador, devido a ++ do for, evita pular caracteries;
                 }
 
@@ -83,10 +83,16 @@ public class ShuntingYard {
         }
 
         while (!stack.isEmpty()) {
-            output.add(stack.pop());
+            output.add(stack.pop().trim());
+        }
+        
+        List<String> outputFinal = new ArrayList<String>();
+        
+        for(String s : output) {
+            outputFinal.add(s.trim());
         }
 
-        return output;
+        return outputFinal;
     }
 
 }
