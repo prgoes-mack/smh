@@ -29,6 +29,20 @@ public class Consulta {
     public Integer getResultadoFinal() {return resultFinal; }
     public Date getDataConsulta(){ return dataConsulta; }
     
+    public Consulta(ArrayList<Evento> da, ArrayList<String> formu) {
+        CalculaFormula(da, formu);
+    }
+    
+    public Consulta() {
+        dataConsulta = new Date(1900, 1, 1);
+    }
+    
+    public Consulta(Date data, int resultado, List<Evento> dados, List<String> formula) {
+        this.formula = formula;
+        this.resultFinal = resultado;
+        this.sensores = dados;
+    }
+    
     public void CalculaFormula (ArrayList<Evento> da, ArrayList<String> formu)
     {
         int x;
