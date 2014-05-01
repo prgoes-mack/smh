@@ -48,12 +48,12 @@ public class ConsultaDAO {
     }
     
     public Consulta gerarConsulta(DBObject doc) {
-        String data = doc.get("DataDaConsulta").toString();
+        Date data = (Date)doc.get("DataDaConsulta");
         int resultado = (int)doc.get("Resultado");
         List<Evento> dados = (List<Evento>)doc.get("DadosFormula");
         List<String> formula = (List<String>)doc.get("Formula");
         
-        return new Consulta(new Date(data), resultado, dados, formula);
+        return new Consulta(data, resultado, dados, formula);
     }
     
     public void gravarConsulta(Consulta c) {

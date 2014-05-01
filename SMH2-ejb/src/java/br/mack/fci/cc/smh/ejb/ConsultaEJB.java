@@ -33,9 +33,12 @@ public class ConsultaEJB {
         List<Evento> eventosParaAnalisar = eventos.lerTodosAposData(consultaMaisRecente.getDataConsulta());
         List<Formula> formulasParaConsolidar = formulas.lerTodosAsFormulas();
         
-        for(Formula formula : formulasParaConsolidar) {
-            Consulta novaConsulta = new Consulta(eventosParaAnalisar, formula.getFormula());
-            consultas.gravarConsulta(novaConsulta);
+        if(eventosParaAnalisar.size() > 0)
+        {
+            for(Formula formula : formulasParaConsolidar) {
+                Consulta novaConsulta = new Consulta(eventosParaAnalisar, formula.getFormula(), consultaMaisRecente);
+                consultas.gravarConsulta(novaConsulta);
+            }
         }
     }
 }

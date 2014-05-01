@@ -34,14 +34,17 @@ public class Consulta {
     public Integer getResultadoFinal() {return resultFinal; }
     public Date getDataConsulta(){ return dataConsulta; }
     
-    public Consulta(List<Evento> da, List<String> formu) {
-        CalculaFormula(da, formu);
+    public Consulta(List<Evento> da, List<String> formu, Consulta consultaAnterior) {
+        CalculaFormula(da, formu, consultaAnterior);
     }
     
     public Consulta() {
         String string = "January 1, 1900";
         try {
             dataConsulta = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
+            dados = new ArrayList<Evento>();
+            formula = new ArrayList<String>();
+            sensores = new ArrayList<Evento>();
         } catch (ParseException ex) {
             Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,9 +54,10 @@ public class Consulta {
         this.formula = formula;
         this.resultFinal = resultado;
         this.sensores = dados;
+        this.dataConsulta = data;
     }
     
-    public void CalculaFormula (List<Evento> da, List<String> formu)
+    public void CalculaFormula (List<Evento> da, List<String> formu, Consulta consultaAnterior)
     {
         int x;
         this.dados=da;
@@ -148,11 +152,30 @@ public class Consulta {
                     //se nao for é uma posicao de sensor
                     else
                     {
+                        Boolean sensorEncontrado = false;
                         for (int k = 0; k < sensores.size(); k++) {
                             if (sensores.get(k).getSensor().equals(aux)) {
+                                sensorEncontrado = true;
                                 int result = sensores.get(k).getValor();
                                 resultados.add(result);
                             }
+                        }
+                        
+                        if(!sensorEncontrado) {
+                            if(consultaAnterior != null) {
+                                for(Evento e : consultaAnterior.getSensores()) {
+                                    if(e.getSensor().equals(aux)) {
+                                        sensorEncontrado = true;
+                                        sensores.add(e);
+                                        int result = e.getValor();
+                                        resultados.add(result);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if(!sensorEncontrado) {
+                            resultados.add(0);
                         }
                     }
                 }break;
