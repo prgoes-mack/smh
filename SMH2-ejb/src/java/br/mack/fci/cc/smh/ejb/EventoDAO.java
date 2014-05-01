@@ -45,9 +45,9 @@ public class EventoDAO {
         String sensor = doc.get("Sensor").toString();
         String tipo = doc.get("Tipo").toString();
         String valor = doc.get("Valor").toString();
-        String dataDoEvento = doc.get("DataDoEvento").toString();
+        Date dataDoEvento = (Date)doc.get("DataDoEvento");
         
-        Evento e = new Evento(valor, sensor, tipo, valor);
+        Evento e = new Evento(dataDoEvento, sensor, tipo, valor);
         
         return e;
     }
@@ -125,4 +125,35 @@ public class EventoDAO {
         return lista;
     }
     
+    public List<Evento> lerTodosAposData(Date data) {
+        List<Evento> lista = new ArrayList<>();
+        
+        MongoClient mongoClient = null;
+        DBCollection coll = null;
+        try {
+            mongoClient = new MongoClient();
+            DB db = mongoClient.getDB( "Parking" );
+            coll = db.getCollection("Eventos");
+        
+            BasicDBObject query = new BasicDBObject("DataDoEvento", new BasicDBObject("$gt", data));
+            DBCursor cursor = coll.find(query);
+            try {
+               while(cursor.hasNext()) {
+                   lista.add(gerarEvento(cursor.next()));
+               }            
+            } catch(Exception ex) {
+                    Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+               cursor.close();
+            }
+        
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            mongoClient.close();
+        }
+        
+        return lista;
+    }
 }

@@ -6,31 +6,33 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import java.util.Date;
+
 /**
  *
  * @author prgoes
  */
 public class Evento {
-    private String _dataDoEvento;
+    private Date _dataDoEvento;
     private String _sensor;
     private String _tipo;
     private String _valor;
     
     public Evento(){        
-        _dataDoEvento = "";
+        _dataDoEvento = new Date(1900, 01, 01);
         _sensor = "";
         _tipo = "";
         _valor = "";
     }
        
-    public Evento(String data, String sensor, String tipo, String valor) {
+    public Evento(Date data, String sensor, String tipo, String valor) {
         _dataDoEvento = data;
         _tipo = tipo;
         _sensor = sensor;
         _valor = valor;
     }
         
-    public String getDataDoEvento() { return _dataDoEvento; }
+    public Date getDataDoEvento() { return _dataDoEvento; }
     public String getSensor() { return _sensor; }
     public String getTipo() { return _tipo; }
     public String getValor() { return _valor; }

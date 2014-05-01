@@ -10,6 +10,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -39,12 +40,20 @@ public class ConsultaDAO {
             }
 
             BasicDBObject doc = new BasicDBObject("DataDaConsulta", c.getDataConsulta()).
-                             // append("Dados", x).
                               append("Formula", c.getFormula()).
                               append ("DadosFormula", c.getSensores()).
                               append ("Resultado",c.getResultadoFinal());
             
         return doc;
+    }
+    
+    public Consulta gerarConsulta(DBObject doc) {
+        String data = doc.get("DataDaConsulta").toString();
+        int resultado = (int)doc.get("Resultado");
+        List<Evento> dados = (List<Evento>)doc.get("DadosFormula");
+        List<String> formula = (List<String>)doc.get("Formula");
+        
+        return new Consulta(new Date(data), resultado, dados, formula);
     }
     
     public void gravarConsulta(Consulta c) {
@@ -64,6 +73,32 @@ public class ConsultaDAO {
         finally {
             mongoClient.close();
         }
+    }
+    
+    public Consulta lerConsultaMaisRecente() {
+        MongoClient mongoClient = null;
+        DBCollection coll = null;
+        try {
+            mongoClient = new MongoClient();
+            DB db = mongoClient.getDB("Parking");
+            coll = db.getCollection("Consultas");
+            
+            DBCursor cursor = coll.find().sort(new BasicDBObject("DataDaConsulta","-1"));
+            
+            if(cursor.hasNext()) {
+                return gerarConsulta(cursor.next());
+            }
+            else {
+                return new Consulta();
+            }
+        } catch (UnknownHostException ex) {
+        Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            mongoClient.close();
+        }
+        
+        return new Consulta();
     }
     
 }
