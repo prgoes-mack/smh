@@ -24,14 +24,14 @@ public class Consulta {
     private List <Evento> dados = new ArrayList<>();
     private List <String> formula = new ArrayList<>();
     private List <Evento> sensores = new ArrayList<>();
-    private List <Integer> resultados = new ArrayList<>();
+    private List <Double> resultados = new ArrayList<>();
     private Date dataConsulta;
-    private Integer resultFinal;
+    private Double resultFinal;
     
     public List<Evento> getEventos() { return dados; }
     public List<String> getFormula() { return formula; }  
     public List<Evento> getSensores() {return sensores; }
-    public Integer getResultadoFinal() {return resultFinal; }
+    public Double getResultadoFinal() {return resultFinal; }
     public Date getDataConsulta(){ return dataConsulta; }
     
     public Consulta(List<Evento> da, List<String> formu, Consulta consultaAnterior) {
@@ -50,7 +50,7 @@ public class Consulta {
         }
     }
     
-    public Consulta(Date data, int resultado, List<Evento> dados, List<String> formula) {
+    public Consulta(Date data, double resultado, List<Evento> dados, List<String> formula) {
         this.formula = formula;
         this.resultFinal = resultado;
         this.sensores = dados;
@@ -83,14 +83,14 @@ public class Consulta {
         x=0;
         while (x<formula.size())
         {
-            int resultado=0;
+            double resultado=0;
             String aux;
             
             aux = formula.get(x);
             switch (aux) {
                 case ("+"): {
                     resultado = 0;
-                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    List<Double> novosResultados = new ArrayList<Double>();
                     for (int t = 0; t < (resultados.size() - 2); t++) {
                         novosResultados.add(resultados.get(t));
                     }
@@ -103,7 +103,7 @@ public class Consulta {
                 break;
                 case ("-"): {
                     resultado = 0;
-                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    List<Double> novosResultados = new ArrayList<Double>();
                     for (int t = 0; t < (resultados.size() - 2); t++) {
                         novosResultados.add(resultados.get(t));
                     }
@@ -116,7 +116,7 @@ public class Consulta {
                 break;
                 case ("*"): {
                     resultado = 1;
-                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    List<Double> novosResultados = new ArrayList<Double>();
                     for (int t = 0; t < (resultados.size() - 2); t++) {
                         novosResultados.add(resultados.get(t));
                     }
@@ -130,7 +130,7 @@ public class Consulta {
                 break;
                 case ("/"): {
                     resultado = 0;
-                    List<Integer> novosResultados = new ArrayList<Integer>();
+                    List<Double> novosResultados = new ArrayList<Double>();
                     for (int t = 0; t < (resultados.size() - 2); t++) {
                         novosResultados.add(resultados.get(t));
                     }
@@ -146,7 +146,7 @@ public class Consulta {
                     //verifica se é numero
                     if (Character.isDigit(aux.charAt(0))==true) 
                     {
-                        int num = Integer.parseInt(aux);
+                        double num = Integer.parseInt(aux);
                         resultados.add(num);
                     }
                     //se nao for é uma posicao de sensor
@@ -156,7 +156,7 @@ public class Consulta {
                         for (int k = 0; k < sensores.size(); k++) {
                             if (sensores.get(k).getSensor().equals(aux)) {
                                 sensorEncontrado = true;
-                                int result = sensores.get(k).getValor();
+                                double result = sensores.get(k).getValor();
                                 resultados.add(result);
                             }
                         }
@@ -167,7 +167,7 @@ public class Consulta {
                                     if(e.getSensor().equals(aux)) {
                                         sensorEncontrado = true;
                                         sensores.add(e);
-                                        int result = e.getValor();
+                                        double result = e.getValor();
                                         resultados.add(result);
                                     }
                                 }
@@ -175,7 +175,7 @@ public class Consulta {
                         }
                         
                         if(!sensorEncontrado) {
-                            resultados.add(0);
+                            resultados.add(0.0);
                         }
                     }
                 }break;

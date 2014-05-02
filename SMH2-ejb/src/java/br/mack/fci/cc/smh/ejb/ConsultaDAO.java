@@ -49,7 +49,7 @@ public class ConsultaDAO {
     
     public Consulta gerarConsulta(DBObject doc) {
         Date data = (Date)doc.get("DataDaConsulta");
-        int resultado = (int)doc.get("Resultado");
+        double resultado = (double)doc.get("Resultado");
         List<Evento> dados = (List<Evento>)doc.get("DadosFormula");
         List<String> formula = (List<String>)doc.get("Formula");
         

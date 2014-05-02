@@ -40,6 +40,7 @@ public class HelloFormulas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         formulas.InsertFormula("Ocupacao", "(Sensor1 + Sensor2 + Sensor3)/3");
+        formulas.InsertFormula("Bernard", "(Sensor1 + Sensor2)*4");
         formulas.InsertFormula("Generica", "((2 * Sensor1) + (4 * Sensor2))/2");
         
         try (PrintWriter out = response.getWriter()) {

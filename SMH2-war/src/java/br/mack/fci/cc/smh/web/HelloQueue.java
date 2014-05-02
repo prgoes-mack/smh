@@ -48,7 +48,7 @@ public class HelloQueue extends HttpServlet {
         
         String mensagem1 = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Sensor1</unidadegrandeza><valor>1</valor></dados>";
         String mensagem2 = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Sensor2</unidadegrandeza><valor>1</valor></dados>";
-        String mensagem3 = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Sensor3</unidadegrandeza><valor>1</valor></dados>";
+        String mensagem3 = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>Sensor3</unidadegrandeza><valor>0</valor></dados>";
         try {
             Connection conn = myFactory.createConnection();
             Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
