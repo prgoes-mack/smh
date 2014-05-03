@@ -10,6 +10,9 @@ import br.mack.fci.cc.smh.ejb.SerieConsulta;
 import br.mack.fci.cc.smh.ejb.SerieDTO;
 import java.util.Date;
 import javax.ejb.EJB;
+import javax.enterprise.context.spi.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -19,12 +22,27 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class GraficoSerie {
     
-    @EJB
-    private SerieConsulta ejb;
+    ///@EJB
+    private SerieConsulta ejb, ejb2;
     private JFreeChart grafico;
     
     public DefaultCategoryDataset construiGraficoSerie (String formula)   
     {
+       
+         Context context = null;
+        try {
+            context =  (Context) new InitialContext();
+             ejb2 = (SerieConsulta)context.lookup ("java:global/SMH2/SMH2-ejb/SerieConsulta");
+            } 
+            catch (NamingException ex) {
+                
+            }
+
+        
+        
+        
+        
+        
        // formula="Ocupacao";
         SerieDTO dto = ejb.executarSerieConsulta(formula);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -47,6 +65,7 @@ public class GraficoSerie {
         return grafico;*/
         
         return dataset;
+            
         
     }
    

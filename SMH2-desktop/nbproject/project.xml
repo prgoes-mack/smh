@@ -23,6 +23,7 @@
             <included-library dirs="200">file.reference.servlet.jar</included-library>
             <included-library dirs="200">file.reference.swtgraphics2d.jar</included-library>
             <included-library dirs="100">reference.SMH2-ejb.dist</included-library>
+            <included-library dirs="200">file.reference.gf-client.jar</included-library>
         </data>
         <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
             <definitions>.\lib\nblibraries.properties</definitions>

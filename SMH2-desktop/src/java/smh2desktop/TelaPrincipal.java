@@ -43,7 +43,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Formula");
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -78,8 +77,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
@@ -107,10 +106,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      DefaultCategoryDataset dt = new DefaultCategoryDataset();
+        System.out.println(jTextField1.getText());
+        DefaultCategoryDataset dt = new DefaultCategoryDataset();
         GraficoSerie grafico = new GraficoSerie();
         dt = grafico.construiGraficoSerie(jTextField1.getText());
-        System.out.println (jTextField1.getText());
         JFreeChart chart = ChartFactory.createLineChart("Gráfico Série", "Consulta", "Valor", dt, PlotOrientation.VERTICAL, true, true, false);
         //exibir o grafico no jPanel1....
          ChartPanel chartPanel = new ChartPanel(chart);
