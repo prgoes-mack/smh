@@ -60,7 +60,7 @@ public class GraficoSerie extends HttpServlet {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         int x=1;
         for(Double key : dto.getResultados().keySet()) {
-            //dto.getResultados().get(key)
+            
                 dataset.addValue(key, "Resultados para "+formula, "Consulta "+x);
                 x++;
             }

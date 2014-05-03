@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,14 +16,16 @@ import java.util.Map;
  */
 public class SerieDTO {
     
-    private Map<Double, Integer> resultados;
+    private Map<Double, Date> resultados;
     private String titulo;
     
     public String getTitulo() { return titulo; }
-    public Map<Double, Integer> getResultados() { return resultados; }
+    public Map<Double, Date> getResultados() { return resultados; }
+    
+  
     
     public SerieDTO() {
-        resultados = new HashMap<Double, Integer>();
+        resultados = new HashMap<Double, Date>();
         titulo = "";
     }
     
@@ -32,7 +35,7 @@ public class SerieDTO {
         }
         
         if(titulo.equals(c.getNome())) {
-            resultados.put(c.getResultadoFinal(), resultados.getOrDefault(c.getResultadoFinal(), 0) + 1);            
+            resultados.put(c.getResultadoFinal(),c.getDataConsulta());
         }
     }   
     
