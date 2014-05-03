@@ -72,7 +72,7 @@ public class GraficoSerie extends HttpServlet {
        // Dataset plot = (CategoryDataset) grafico.getPlot(); 
         //plot.setLabelFont(new Font("Tahoma", Font.PLAIN, 11)); 
         ChartRenderingInfo info = null;
-        BufferedImage chartImage = grafico.createBufferedImage(640, 400, info);
+        BufferedImage chartImage = grafico.createBufferedImage(800, 600, info);
         response.setContentType("imageSerie.png");
         // send the picture
         PngEncoder encoder = new PngEncoder(chartImage, false, 0, 9);
