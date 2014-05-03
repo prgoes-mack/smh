@@ -16,16 +16,16 @@ import java.util.Map;
  */
 public class SerieDTO {
     
-    private Map<Double, Date> resultados;
+    private Map<Date,Double> resultados;
     private String titulo;
     
     public String getTitulo() { return titulo; }
-    public Map<Double, Date> getResultados() { return resultados; }
+    public Map<Date,Double> getResultados() { return resultados; }
     
   
     
     public SerieDTO() {
-        resultados = new HashMap<Double, Date>();
+        resultados = new HashMap<Date,Double>();
         titulo = "";
     }
     
@@ -35,7 +35,7 @@ public class SerieDTO {
         }
         
         if(titulo.equals(c.getNome())) {
-            resultados.put(c.getResultadoFinal(),c.getDataConsulta());
+            resultados.put(c.getDataConsulta(),c.getResultadoFinal());
         }
     }   
     
