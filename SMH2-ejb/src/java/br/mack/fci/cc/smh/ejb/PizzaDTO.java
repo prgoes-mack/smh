@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  *
  * @author prgoes
  */
-public class PizzaDTO {
+public class PizzaDTO implements Serializable {
     
     private Map<Double, Integer> resultados;
     private String titulo;
