@@ -29,19 +29,14 @@ public class GraficoSerie {
     public DefaultCategoryDataset construiGraficoSerie (String formula)   
     {
        
-         Context context = null;
+        InitialContext context = null;
         try {
-            context =  (Context) new InitialContext();
+            context =  new InitialContext();
              ejb2 = (SerieConsulta)context.lookup ("java:global/SMH2/SMH2-ejb/SerieConsulta");
             } 
             catch (NamingException ex) {
                 
             }
-
-        
-        
-        
-        
         
        // formula="Ocupacao";
         SerieDTO dto = ejb.executarSerieConsulta(formula);
@@ -52,7 +47,7 @@ public class GraficoSerie {
             dataset.addValue(dto.getResultados().get(key), "Resultados para " + dto.getTitulo(), key);
             x++;
         }
-      //  grafico = ChartFactory.createLineChart("Gr·fico SÈrie", "Consulta", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
+      //  grafico = ChartFactory.createLineChart("Gr√°fico S√©rie", "Consulta", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
 
        /* BufferedImage buf = null;
         buf = grafico.createBufferedImage(400, 300);
