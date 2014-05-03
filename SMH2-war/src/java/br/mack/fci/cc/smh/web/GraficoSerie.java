@@ -62,7 +62,7 @@ public class GraficoSerie extends HttpServlet {
         int x=1;
         for(Date key : dto.getResultados().keySet()) {
             
-               // dataset.addValue(key, "Resultados para "+dto.getTitulo(), );
+               dataset.addValue(dto.getResultados().get(key), "Resultados para "+dto.getTitulo(),key );
                 x++;
             }
         JFreeChart grafico = ChartFactory.createLineChart("Gráfico Série", "Consulta", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
