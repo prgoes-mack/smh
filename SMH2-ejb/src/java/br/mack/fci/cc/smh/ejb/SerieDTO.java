@@ -11,9 +11,9 @@ import java.util.Map;
 
 /**
  *
- * @author prgoes
+ * @author Andrea
  */
-public class PizzaDTO {
+public class SerieDTO {
     
     private Map<Double, Integer> resultados;
     private String titulo;
@@ -21,7 +21,7 @@ public class PizzaDTO {
     public String getTitulo() { return titulo; }
     public Map<Double, Integer> getResultados() { return resultados; }
     
-    public PizzaDTO() {
+    public SerieDTO() {
         resultados = new HashMap<Double, Integer>();
         titulo = "";
     }
@@ -32,7 +32,8 @@ public class PizzaDTO {
         }
         
         if(titulo.equals(c.getNome())) {
-            resultados.put(c.getResultadoFinal(), resultados.getOrDefault(c.getResultadoFinal(), 0) + 1);
+            resultados.put(c.getResultadoFinal(), resultados.getOrDefault(c.getResultadoFinal(), 0) + 1);            
         }
-    }    
+    }   
+    
 }
