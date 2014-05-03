@@ -58,14 +58,16 @@ public class GraficoSerie extends HttpServlet {
         SerieDTO dto = ejb.executarSerieConsulta(formula);
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-      
+        int x=1;
         for(Double key : dto.getResultados().keySet()) {
-                dataset.addValue(dto.getResultados().get(key), "Serie 1", key);
+            //dto.getResultados().get(key)
+                dataset.addValue(key, "Resultados para "+formula, "Consulta "+x);
+                x++;
             }
-        JFreeChart grafico = ChartFactory.createLineChart("Gráfico Série", "Dia", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart grafico = ChartFactory.createLineChart("Gráfico Série", "Consulta", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
         
         BufferedImage buf = null;
-         buf = grafico.createBufferedImage(400, 250);
+         buf = grafico.createBufferedImage(400, 300);
        // Dataset plot = (CategoryDataset) grafico.getPlot(); 
         //plot.setLabelFont(new Font("Tahoma", Font.PLAIN, 11)); 
         ChartRenderingInfo info = null;
@@ -75,19 +77,6 @@ public class GraficoSerie extends HttpServlet {
         PngEncoder encoder = new PngEncoder(chartImage, false, 0, 9);
         response.getOutputStream().write(encoder.pngEncode());
         
-        
-       // try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-        /*    out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>GraficoSerie</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Formula: " + request.getParameter("nome") + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
