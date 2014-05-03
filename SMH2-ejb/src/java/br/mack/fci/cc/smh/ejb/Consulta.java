@@ -27,15 +27,18 @@ public class Consulta {
     private List <Double> resultados = new ArrayList<>();
     private Date dataConsulta;
     private Double resultFinal;
+    private String nome;
     
     public List<Evento> getEventos() { return dados; }
     public List<String> getFormula() { return formula; }  
     public List<Evento> getSensores() {return sensores; }
     public Double getResultadoFinal() {return resultFinal; }
     public Date getDataConsulta(){ return dataConsulta; }
+    public String getNome() { return nome; }
     
-    public Consulta(List<Evento> da, List<String> formu, Consulta consultaAnterior) {
-        CalculaFormula(da, formu, consultaAnterior);
+    public Consulta(List<Evento> da, Formula formula, Consulta consultaAnterior) {
+        nome = formula.getNomeFormula();
+        CalculaFormula(da, formula.getFormula(), consultaAnterior);
     }
     
     public Consulta() {
@@ -50,7 +53,8 @@ public class Consulta {
         }
     }
     
-    public Consulta(Date data, double resultado, List<Evento> dados, List<String> formula) {
+    public Consulta(String nome, Date data, double resultado, List<Evento> dados, List<String> formula) {
+        this.nome = nome;
         this.formula = formula;
         this.resultFinal = resultado;
         this.sensores = dados;

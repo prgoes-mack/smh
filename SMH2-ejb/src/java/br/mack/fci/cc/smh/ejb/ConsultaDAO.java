@@ -40,9 +40,10 @@ public class ConsultaDAO {
             }
 
             BasicDBObject doc = new BasicDBObject("DataDaConsulta", c.getDataConsulta()).
-                              append("Formula", c.getFormula()).
-                              append ("DadosFormula", x).
-                              append ("Resultado",c.getResultadoFinal());
+                            append("Nome", c.getNome()).
+                            append("Formula", c.getFormula()).
+                            append ("DadosFormula", x).
+                            append ("Resultado",c.getResultadoFinal());
             
         return doc;
     }
@@ -52,8 +53,9 @@ public class ConsultaDAO {
         double resultado = (double)doc.get("Resultado");
         List<Evento> dados = (List<Evento>)doc.get("DadosFormula");
         List<String> formula = (List<String>)doc.get("Formula");
+        String nome = doc.get("Nome").toString();
         
-        return new Consulta(data, resultado, dados, formula);
+        return new Consulta(nome, data, resultado, dados, formula);
     }
     
     public void gravarConsulta(Consulta c) {

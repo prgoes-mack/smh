@@ -36,7 +36,7 @@ public class ConsultaEJB {
         if(eventosParaAnalisar.size() > 0)
         {
             for(Formula formula : formulasParaConsolidar) {
-                Consulta novaConsulta = new Consulta(eventosParaAnalisar, formula.getFormula(), consultaMaisRecente);
+                Consulta novaConsulta = new Consulta(eventosParaAnalisar, formula, consultaMaisRecente);
                 consultas.gravarConsulta(novaConsulta);
             }
         }
