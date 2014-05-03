@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,9 +60,9 @@ public class GraficoSerie extends HttpServlet {
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         int x=1;
-        for(Double key : dto.getResultados().keySet()) {
+        for(Date key : dto.getResultados().keySet()) {
             
-                dataset.addValue(key, "Resultados para "+formula, "Consulta "+x);
+               // dataset.addValue(key, "Resultados para "+dto.getTitulo(), );
                 x++;
             }
         JFreeChart grafico = ChartFactory.createLineChart("Gráfico Série", "Consulta", "Valor", dataset, PlotOrientation.VERTICAL, true, true, false);
