@@ -6,15 +6,14 @@
 
 package br.mack.fci.cc.smh.ejb;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  *
- * @author prgoes
+ * @author Andrea
  */
-public class PizzaDTO implements Serializable {
+public class SerieDTO {
     
     private Map<Double, Integer> resultados;
     private String titulo;
@@ -22,7 +21,7 @@ public class PizzaDTO implements Serializable {
     public String getTitulo() { return titulo; }
     public Map<Double, Integer> getResultados() { return resultados; }
     
-    public PizzaDTO() {
+    public SerieDTO() {
         resultados = new HashMap<Double, Integer>();
         titulo = "";
     }
@@ -33,7 +32,8 @@ public class PizzaDTO implements Serializable {
         }
         
         if(titulo.equals(c.getNome())) {
-            resultados.put(c.getResultadoFinal(), resultados.getOrDefault(c.getResultadoFinal(), 0) + 1);
+            resultados.put(c.getResultadoFinal(), resultados.getOrDefault(c.getResultadoFinal(), 0) + 1);            
         }
-    }    
+    }   
+    
 }
