@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -21,11 +22,11 @@ public class PizzaMediaHistoricaPorConsulta {
     public PizzaDTO executarPorConsulta(String nomeConsulta) {
         PizzaDTO resultado = new PizzaDTO();
         
-        //List<Consulta> resultados = consultas.lerPorNome(nomeConsulta);
+        List<Consulta> resultados = consultas.lerConsultasPorNome(nomeConsulta);
         
-        //for(Consulta c : resultados) {        
-            //resultado.adicionar(c);        
-        //}
+        for(Consulta c : resultados) {        
+            resultado.adicionar(c);        
+        }
         
         return resultado;
     }

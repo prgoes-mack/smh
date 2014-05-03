@@ -103,4 +103,29 @@ public class ConsultaDAO {
         return new Consulta();
     }
     
+    public List<Consulta> lerConsultasPorNome(String nomeConsulta) {
+        MongoClient mongoClient = null;
+        DBCollection coll = null;
+        List<Consulta> resultado = new ArrayList<Consulta>();
+        try {
+            mongoClient = new MongoClient();
+            DB db = mongoClient.getDB("Parking");
+            coll = db.getCollection("Consultas");
+            
+            BasicDBObject query = new BasicDBObject("Nome",nomeConsulta);
+            DBCursor cursor = coll.find(query);
+            
+            while(cursor.hasNext()) {
+                resultado.add(gerarConsulta(cursor.next()));
+            }
+        } catch (UnknownHostException ex) {
+        Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            mongoClient.close();
+        }
+        
+        return resultado;
+    }
+    
 }
