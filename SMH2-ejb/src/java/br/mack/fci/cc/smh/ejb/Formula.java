@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.ejb;
 import static br.mack.fci.cc.smh.ejb.ShuntingYard.*;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -15,6 +16,13 @@ public class Formula {
     private List<String> _Formula;
     private String _Nome;
     private String _Original;
+    
+    public Formula()
+    {
+        _Original = "";
+        _Formula = new ArrayList<String>();
+        _Nome = "";
+    }
     
     public Formula(String nome, String formula){
         _Original = formula;

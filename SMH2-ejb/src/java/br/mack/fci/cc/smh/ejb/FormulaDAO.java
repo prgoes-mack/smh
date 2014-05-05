@@ -70,11 +70,11 @@ public class FormulaDAO {
             mongoClient = new MongoClient();
             DB db = mongoClient.getDB("Parking");
             coll = db.getCollection("Formulas");
-
             DBCursor cursor = coll.find();
             try {
                 while (cursor.hasNext()) {
                     lista.add(gerarFormula(cursor.next()));
+
                 }
             } catch (Exception ex) {
                 Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,6 +91,37 @@ public class FormulaDAO {
         return lista;
     }
 
+    public Formula encontrarFormula(String nome) {
+        List<Formula> lista = new ArrayList<>();
+        MongoClient mongoClient = null;
+        DBCollection coll = null;
+        try {
+            mongoClient = new MongoClient();
+            DB db = mongoClient.getDB("Parking");
+            coll = db.getCollection("Formulas");
+
+            BasicDBObject query = new BasicDBObject("NomeFormula", nome);
+
+            DBCursor cursor = coll.find(query);
+            try {
+                while (cursor.hasNext()) {
+                    lista.add(gerarFormula(cursor.next()));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                cursor.close();
+            }
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FormulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mongoClient.close();
+        }
+        
+        if(lista.size()>0) return lista.get(0);
+        return new Formula();
+    }
+
     public void removerFormula(String nome) {
         MongoClient mongoClient = null;
         DBCollection coll = null;
@@ -99,8 +130,27 @@ public class FormulaDAO {
             DB db = mongoClient.getDB("Parking");
             coll = db.getCollection("Formulas");
 
-            BasicDBObject query = new BasicDBObject("Nome", nome);
+            BasicDBObject query = new BasicDBObject("NomeFormula", nome);
             coll.remove(query);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FormulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mongoClient.close();
+        }
+    }
+
+    public void alterarFormula(Formula _formula) {
+        MongoClient mongoClient = null;
+        DBCollection coll = null;
+        try {
+            mongoClient = new MongoClient();
+            BasicDBObject doc = gerarDocument(_formula);
+            DB db = mongoClient.getDB("Parking");
+            coll = db.getCollection("Formulas");
+            
+            BasicDBObject query = new BasicDBObject("NomeFormula", _formula.getNomeFormula());
+            coll.findAndModify(query,doc);
 
         } catch (UnknownHostException ex) {
             Logger.getLogger(FormulaDAO.class.getName()).log(Level.SEVERE, null, ex);

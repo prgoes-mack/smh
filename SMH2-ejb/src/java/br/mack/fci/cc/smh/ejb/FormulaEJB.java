@@ -23,6 +23,11 @@ public class FormulaEJB {
     @EJB
     private FormulaDAO formulas;
 
+    public FormulaEJB()
+    {
+        formulas = new FormulaDAO();
+    }
+    
     public void InsertFormula(String nome, String formula) {
         try {
             Formula _formula = new Formula(nome, formula);
@@ -42,9 +47,29 @@ public class FormulaEJB {
         return listFormula;
     }
 
+    public Formula encontrarFormula(String nome)
+    {
+        Formula form = new Formula();
+        try {
+           form = formulas.encontrarFormula(nome);
+        } catch (Exception ex) {
+            Logger.getLogger(FormulaEJB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return form;
+    }
+    
     public void removerFormula(String nome) {
         try {
             formulas.removerFormula(nome);
+        } catch (Exception ex) {
+            Logger.getLogger(FormulaEJB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void AlterarFormula(String nome, String formula) {
+        try {
+            Formula _formula = new Formula(nome, formula);
+            formulas.alterarFormula(_formula);
         } catch (Exception ex) {
             Logger.getLogger(FormulaEJB.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -19,7 +19,7 @@
         <title>Lista de Formulas</title>
     </head>
     <body>
-        <table>
+        <table style="border: 1px solid black;">
             <tr>
                 <th>Nome</th><th>Formula</th><th>Editar</th><th>Excluir</th>
             </tr>
@@ -35,10 +35,10 @@
                     out.print("</td>");
             %>
             <td>
-                botão;
+                <a href="EditFormula.jsp?nome=<%= item.getNomeFormula()%>">Editar</a>
             </td>
             <td>
-                botão;
+                <a href="DeleteFormula.jsp?nome=<%= item.getNomeFormula()%>">Deletar</a>
             </td>
             <%
                     out.print("</tr>");
