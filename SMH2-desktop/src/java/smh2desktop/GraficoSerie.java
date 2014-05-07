@@ -6,6 +6,7 @@
 
 package smh2desktop;
 
+import br.mack.fci.cc.smh.ejb.ISerieConsulta;
 import br.mack.fci.cc.smh.ejb.SerieConsulta;
 import br.mack.fci.cc.smh.ejb.SerieDTO;
 import java.util.Date;
@@ -21,9 +22,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Andrea
  */
 public class GraficoSerie {
-    
-    ///@EJB
-    private SerieConsulta ejb, ejb2;
+    private ISerieConsulta ejb;
     private JFreeChart grafico;
     
     public DefaultCategoryDataset construiGraficoSerie (String formula)   
@@ -32,7 +31,7 @@ public class GraficoSerie {
         InitialContext context = null;
         try {
             context =  new InitialContext();
-             ejb2 = (SerieConsulta)context.lookup ("java:global/SMH2/SMH2-ejb/SerieConsulta");
+             ejb = (ISerieConsulta)context.lookup ("java:global/SMH2/SMH2-ejb/SerieConsulta");
             } 
             catch (NamingException ex) {
                 

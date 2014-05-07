@@ -8,6 +8,7 @@ package br.mack.fci.cc.smh.ejb;
 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 /**
@@ -15,10 +16,12 @@ import javax.ejb.Stateless;
  * @author prgoes
  */
 @Stateless
-public class PizzaMediaHistoricaPorConsulta {
+@Remote(IPizzaMediaHistoricaPorConsulta.class)
+public class PizzaMediaHistoricaPorConsulta implements IPizzaMediaHistoricaPorConsulta {
     @EJB
     private ConsultaDAO consultas;
     
+    @Override
     public PizzaDTO executarPorConsulta(String nomeConsulta) {
         PizzaDTO resultado = new PizzaDTO();
         

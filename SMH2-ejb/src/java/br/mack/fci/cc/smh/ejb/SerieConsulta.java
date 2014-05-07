@@ -10,16 +10,19 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.ejb.Remote;
 
 /**
  *
  * @author Andrea
  */
 @Stateless
-public class SerieConsulta {
+@Remote(ISerieConsulta.class)
+public class SerieConsulta implements ISerieConsulta {
     @EJB
     private ConsultaDAO consultas;
 
+    @Override
      public SerieDTO  executarSerieConsulta(String nomeConsulta) {
         SerieDTO resultado = new SerieDTO();
         

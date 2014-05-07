@@ -129,8 +129,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dt = grafico.construiGraficoSerie(jTextField1.getText());
         JFreeChart chart = ChartFactory.createLineChart("Gráfico Série", "Consulta", "Valor", dt, PlotOrientation.VERTICAL, true, true, false);
         //exibir o grafico no jPanel1....
-         ChartPanel chartPanel = new ChartPanel(chart);
-         jPanel1.add(chartPanel);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        jPanel1.add(chartPanel);
          
         //Inicio do código do Gráfico de Pizza;
 
