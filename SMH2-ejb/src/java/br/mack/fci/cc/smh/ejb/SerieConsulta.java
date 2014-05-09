@@ -16,14 +16,14 @@ import javax.ejb.Remote;
  *
  * @author Andrea
  */
+//@Remote(ISerieConsulta.class)
 @Stateless
-@Remote(ISerieConsulta.class)
-public class SerieConsulta implements ISerieConsulta {
+public class SerieConsulta {
     @EJB
     private ConsultaDAO consultas;
 
-    @Override
-     public SerieDTO  executarSerieConsulta(String nomeConsulta) {
+    //@Override
+    public SerieDTO  executarSerieConsulta(String nomeConsulta) {
         SerieDTO resultado = new SerieDTO();
         
         List<Consulta> resultados = consultas.lerConsultasPorNome(nomeConsulta);

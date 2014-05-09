@@ -15,13 +15,13 @@ import javax.ejb.Stateless;
  *
  * @author prgoes
  */
+//@Remote(IPizzaMediaHistoricaPorConsulta.class)
 @Stateless
-@Remote(IPizzaMediaHistoricaPorConsulta.class)
-public class PizzaMediaHistoricaPorConsulta implements IPizzaMediaHistoricaPorConsulta {
+public class PizzaMediaHistoricaPorConsulta {
     @EJB
     private ConsultaDAO consultas;
     
-    @Override
+    //@Override
     public PizzaDTO executarPorConsulta(String nomeConsulta) {
         PizzaDTO resultado = new PizzaDTO();
         
