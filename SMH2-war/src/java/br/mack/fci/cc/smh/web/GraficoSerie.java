@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.web;
 
+import br.mack.fci.cc.smh.ejb.ISerieConsulta;
 import br.mack.fci.cc.smh.ejb.SerieConsulta;
 import br.mack.fci.cc.smh.ejb.SerieDTO;
 import com.keypoint.PngEncoder;
@@ -41,7 +42,7 @@ import org.jfree.data.general.DefaultPieDataset;
 public class GraficoSerie extends HttpServlet {
     
     @EJB
-    private SerieConsulta ejb;
+    private ISerieConsulta ejb;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

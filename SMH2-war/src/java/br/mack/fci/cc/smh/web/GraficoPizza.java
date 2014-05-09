@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.web;
 
+import br.mack.fci.cc.smh.ejb.IPizzaMediaHistoricaPorConsulta;
 import br.mack.fci.cc.smh.ejb.PizzaDTO;
 import br.mack.fci.cc.smh.ejb.PizzaMediaHistoricaPorConsulta;
 import com.keypoint.PngEncoder;
@@ -35,7 +36,7 @@ import org.jfree.data.general.DefaultPieDataset;
 public class GraficoPizza extends HttpServlet {
     
     @EJB
-    private PizzaMediaHistoricaPorConsulta ejb;
+    private IPizzaMediaHistoricaPorConsulta ejb;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,7 +57,7 @@ public class GraficoPizza extends HttpServlet {
         //request.setAttribute("chartDTO", dto);        
         //request.getRequestDispatcher("/pizzagraph.jsp").forward(request, response);
         
-         DefaultPieDataset pieDataset = new DefaultPieDataset(); 
+        DefaultPieDataset pieDataset = new DefaultPieDataset(); 
         for(Double key : dto.getResultados().keySet()) {
                 pieDataset.setValue(key, dto.getResultados().get(key));
             }

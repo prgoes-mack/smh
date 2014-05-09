@@ -6,12 +6,13 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import javax.ejb.Remote;
+
 /**
  *
  * @author prgoes
  */
+@Remote
 public interface IPizzaMediaHistoricaPorConsulta {
-
-    PizzaDTO executarPorConsulta(String nomeConsulta);
-    
+    PizzaDTO executarPorConsulta(String nomeConsulta);    
 }

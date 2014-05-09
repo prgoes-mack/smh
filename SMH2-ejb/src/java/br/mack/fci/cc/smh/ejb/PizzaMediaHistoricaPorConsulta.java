@@ -17,7 +17,7 @@ import javax.ejb.Stateless;
  */
 //@Remote(IPizzaMediaHistoricaPorConsulta.class)
 @Stateless
-public class PizzaMediaHistoricaPorConsulta {
+public class PizzaMediaHistoricaPorConsulta implements IPizzaMediaHistoricaPorConsulta {
     @EJB
     private ConsultaDAO consultas;
     

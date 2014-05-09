@@ -16,9 +16,9 @@ import javax.ejb.Remote;
  *
  * @author Andrea
  */
-//@Remote(ISerieConsulta.class)
+
 @Stateless
-public class SerieConsulta {
+public class SerieConsulta implements ISerieConsulta {
     @EJB
     private ConsultaDAO consultas;
 

@@ -6,12 +6,13 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import javax.ejb.Remote;
+
 /**
  *
  * @author prgoes
  */
+@Remote
 public interface ISerieConsulta {
-
-    SerieDTO executarSerieConsulta(String nomeConsulta);
-    
+    SerieDTO executarSerieConsulta(String nomeConsulta);    
 }

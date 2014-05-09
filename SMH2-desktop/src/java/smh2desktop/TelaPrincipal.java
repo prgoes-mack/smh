@@ -6,6 +6,8 @@
 
 package smh2desktop;
 
+import java.awt.Label;
+import javax.swing.JLabel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -126,14 +128,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         System.out.println(jTextField1.getText());
         DefaultCategoryDataset dt = new DefaultCategoryDataset();
         GraficoSerie grafico = new GraficoSerie();
+        /*
         dt = grafico.construiGraficoSerie(jTextField1.getText());
         JFreeChart chart = ChartFactory.createLineChart("Gráfico Série", "Consulta", "Valor", dt, PlotOrientation.VERTICAL, true, true, false);
         //exibir o grafico no jPanel1....
         ChartPanel chartPanel = new ChartPanel(chart);
         jPanel1.add(chartPanel);
-         
+        */
         //Inicio do código do Gráfico de Pizza;
 
+        JLabel lbl = new JLabel();
+        lbl.setText("Olá");
+        jPanel2.add(lbl);
+        
         GraficoPizza gp = new GraficoPizza();
         DefaultPieDataset gPie = gp.construiGraficoPizza(jTextField1.getText());
         JFreeChart cPie = ChartFactory.createPieChart("Gráfico de Pizza", gPie);
