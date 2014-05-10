@@ -33,7 +33,7 @@ public class GraficoSerie {
         try {
             //context =  new InitialContext();
             InitialContext context = new InitialContext();
-            ISerieConsulta ejb = (ISerieConsulta)context.lookup ("java:global/SMH2/SMH2-ejb/SerieConsulta");
+            ISerieConsulta ejb = (ISerieConsulta)context.lookup ("java:global/SMH2-ejb/SerieConsulta");
             SerieDTO dto = ejb.executarSerieConsulta(formula);
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             for (Date key : dto.getResultados().keySet()) {

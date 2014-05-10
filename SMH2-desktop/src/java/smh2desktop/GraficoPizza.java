@@ -30,7 +30,7 @@ public class GraficoPizza {
     {
         try {
             InitialContext ctx = new InitialContext();
-            IPizzaMediaHistoricaPorConsulta ejb = (IPizzaMediaHistoricaPorConsulta)ctx.lookup("java:global/SMH2/SMH2-ejb/PizzaMediaHistoricaPorConsulta");
+            IPizzaMediaHistoricaPorConsulta ejb = (IPizzaMediaHistoricaPorConsulta)ctx.lookup("java:global/SMH2-ejb/PizzaMediaHistoricaPorConsulta");
             DefaultPieDataset dataset = new DefaultPieDataset();
             PizzaDTO dto = ejb.executarPorConsulta(formula);
             for (Double key : dto.getResultados().keySet()) {
