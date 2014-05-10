@@ -26,11 +26,11 @@ import org.jfree.data.general.DefaultPieDataset;
 public class GraficoPizza {
     private JFreeChart grafico;
     
-    public DefaultPieDataset construiGraficoPizza (String formula)   
+    public static DefaultPieDataset construiGraficoPizza (String formula)   
     {
         try {
             InitialContext ctx = new InitialContext();
-            IPizzaMediaHistoricaPorConsulta ejb = (IPizzaMediaHistoricaPorConsulta)ctx.lookup("java:global/SMH2-ejb/PizzaMediaHistoricaPorConsulta");
+            IPizzaMediaHistoricaPorConsulta ejb = (IPizzaMediaHistoricaPorConsulta)ctx.lookup("java:global/SMH2/SMH2-ejb/PizzaMediaHistoricaPorConsulta");
             DefaultPieDataset dataset = new DefaultPieDataset();
             PizzaDTO dto = ejb.executarPorConsulta(formula);
             for (Double key : dto.getResultados().keySet()) {

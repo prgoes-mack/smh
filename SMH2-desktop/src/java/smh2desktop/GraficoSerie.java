@@ -25,25 +25,20 @@ import org.jfree.data.general.DefaultPieDataset;
  * @author Andrea
  */
 public class GraficoSerie {
-    private ISerieConsulta ejb;
-    private JFreeChart grafico;
-    private SerieDTO dto = new SerieDTO();
     
-    public DefaultCategoryDataset construiGraficoSerie (String formula)   
+    public static DefaultCategoryDataset construiGraficoSerie (String formula)   
     {
        
       //  InitialContext context = null;
         try {
             //context =  new InitialContext();
             InitialContext context = new InitialContext();
-            ejb = (ISerieConsulta)context.lookup ("java:global/SMH2-ejb/SerieConsulta");
-            dto = ejb.executarSerieConsulta(formula);
+            ISerieConsulta ejb = (ISerieConsulta)context.lookup ("java:global/SMH2/SMH2-ejb/SerieConsulta");
+            SerieDTO dto = ejb.executarSerieConsulta(formula);
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            int x = 1;
             for (Date key : dto.getResultados().keySet()) {
 
                 dataset.addValue(dto.getResultados().get(key), "Resultados para " + dto.getTitulo(), key);
-                x++;
             }
         return dataset;
         } 

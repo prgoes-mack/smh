@@ -66,7 +66,7 @@ public class Consulta {
         int x;
         this.dados=da;
         this.formula=formu;
-        dataConsulta=new Date();
+        dataConsulta=(new Date());
         
         //Percorre dados para encontrar os eventos mais recentes
         //assume-se que a lista de eventos esteja ordenada do evento 
