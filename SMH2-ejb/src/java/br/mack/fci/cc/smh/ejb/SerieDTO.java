@@ -6,6 +6,7 @@
 
 package br.mack.fci.cc.smh.ejb;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Map;
  *
  * @author Andrea
  */
-public class SerieDTO {
+public class SerieDTO implements Serializable {
     
     private Map<Date,Double> resultados;
     private String titulo;
