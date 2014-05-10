@@ -90,6 +90,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         //Inicio do código do Gráfico de Serie;
         SerieChart cSerie = new SerieChart("", jTextField1.getText());
         cSerie.pack();

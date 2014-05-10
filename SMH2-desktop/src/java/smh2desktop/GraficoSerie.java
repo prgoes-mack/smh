@@ -42,9 +42,12 @@ public class GraficoSerie {
             }
         return dataset;
         } 
-            catch (NamingException ex) {
-                Logger.getLogger(GraficoSerie.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        catch (NamingException ex) {
+            Logger.getLogger(GraficoSerie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (Exception ex) {
+            Logger.getLogger(GraficoSerie.class.getName()).log(Level.SEVERE, null, ex);
+        }
      
          return new DefaultCategoryDataset();      
     }
