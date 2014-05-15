@@ -9,6 +9,7 @@ package br.mack.fci.cc.smh.ejb;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 
 /**
@@ -27,7 +28,10 @@ public class ConsultaEJB {
     @EJB
     private FormulaDAO formulas;
     
+    @Schedule(minute="*/1",hour="*", persistent=false)
     public void gerarConsultas() {
+        
+        System.out.println("Executando gerador de consultas!");
         
         Consulta consultaMaisRecente = consultas.lerConsultaMaisRecente();
         List<Evento> eventosParaAnalisar = eventos.lerTodosAposData(consultaMaisRecente.getDataConsulta());
