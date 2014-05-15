@@ -51,7 +51,11 @@ public class ConsultaDAO {
     public Consulta gerarConsulta(DBObject doc) {
         Date data = (Date)doc.get("DataDaConsulta");
         double resultado = (double)doc.get("Resultado");
-        List<Evento> dados = (List<Evento>)doc.get("DadosFormula");
+        //List<Evento> dados = (List<Evento>)doc.get("DadosFormula");
+        List<Evento> dados = new ArrayList<Evento>();
+        for(DBObject evento : (List<DBObject>)doc.get("DadosFormula")) {
+            dados.add(eventos.gerarEvento(evento));
+        }
         List<String> formula = (List<String>)doc.get("Formula");
         String nome = doc.get("Nome").toString();
         

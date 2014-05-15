@@ -33,8 +33,8 @@ public class QueueWS {
     private Queue myQueue;
     
     @WebMethod(operationName = "enviaLeitura") 
-    public void sendMessage(String nomeSensor, Boolean ocupado){ 
-        String mensagem = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>"+nomeSensor+"</unidadegrandeza><valor>"+ocupado.toString()+"</valor></dados>";
+    public void sendMessage(String nomeSensor, Double valor){ 
+        String mensagem = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><dados><data>"+new Date()+"</data><grandeza>Unidade</grandeza><unidadegrandeza>"+nomeSensor+"</unidadegrandeza><valor>"+valor.toString()+"</valor></dados>";
         try {
             Connection conn = myFactory.createConnection();
             Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);

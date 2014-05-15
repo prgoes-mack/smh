@@ -28,7 +28,7 @@ public class ConsultaEJB {
     @EJB
     private FormulaDAO formulas;
     
-    @Schedule(minute="*/1",hour="*", persistent=false)
+    //@Schedule(minute="*/1",hour="*", persistent=false)
     public void gerarConsultas() {
         
         System.out.println("Executando gerador de consultas!");
